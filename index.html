@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Basic Meta Tags -->
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="tjq8288">
+    <meta name="theme-color" content="#d97706">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="복권 번호 생성기">
+    
+    <!-- SEO Meta Tags will be dynamically updated by JavaScript -->
+    <title>복권 번호 생성기 - AI 기반 로또 번호 추천 및 분석</title>
+    <meta name="description" content="AI 기반 복권 번호 생성기로 로또, 파워볼, 메가밀리언 등 전 세계 복권 번호를 생성하세요. 12개 언어 지원, 통계 분석, 당첨 확률 계산까지!">
+    <meta name="keywords" content="복권 번호 생성기, 로또 번호, 파워볼, 메가밀리언, AI 복권, 당첨 번호, lottery number generator">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="복권 번호 생성기 - AI 기반 로또 번호 추천">
+    <meta property="og:description" content="AI가 분석한 최적의 복권 번호로 행운을 잡으세요! 전 세계 복권 게임 지원.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tjq8288.github.io/lottery-generator/">
+    <meta property="og:image" content="https://tjq8288.github.io/lottery-generator/og-image.png">
+    <meta property="og:site_name" content="복권 번호 생성기">
+    <meta property="og:locale" content="ko_KR">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="복권 번호 생성기 - AI 기반 로또 번호 추천">
+    <meta name="twitter:description" content="AI가 분석한 최적의 복권 번호로 행운을 잡으세요!">
+    <meta name="twitter:image" content="https://tjq8288.github.io/lottery-generator/og-image.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://tjq8288.github.io/lottery-generator/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iI2Q5NzcwNiIvPgo8dGV4dCB4PSI4IiB5PSIyMiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSJ3aGl0ZSI+🎲</dGV4dD4KPC9zdmc+">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Lottery Number Generator",
+      "alternateName": "복권 번호 생성기",
+      "description": "AI-powered lottery number generator supporting global lottery games with statistical analysis",
+      "url": "https://tjq8288.github.io/lottery-generator/",
+      "applicationCategory": "GameApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "tjq8288"
+      },
+      "keywords": "lottery number generator, lotto numbers, powerball, mega millions, AI lottery picker",
+      "inLanguage": ["ko", "en", "zh", "es", "ar", "pt", "hi", "id", "de", "fr", "ja", "ru"],
+      "featureList": [
+        "AI-based number generation",
+        "Multiple lottery games support",
+        "Statistical analysis",
+        "Historical winning numbers",
+        "12 languages support"
+      ]
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        /* RTL support for Arabic */
+        body[dir="rtl"] {
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 30px;
+            position: relative;
+            border-bottom: 3px solid #d97706;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="lottery" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect fill="url(%23lottery)" width="100" height="100"/></svg>');
+            opacity: 0.5;
+        }
+
+        #language-selector {
+            position: absolute; 
+            top: 15px; 
+            right: 20px; 
+            z-index: 10;
+        }
+
+        body[dir="rtl"] #language-selector {
+            right: auto;
+            left: 20px;
+        }
+
+        #lang-switcher {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background-color: rgba(255,255,255,0.9);
+            color: #1f2937;
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            font-weight: 400;
+        }
+
+        .main-content {
+            padding: 40px 30px;
+            background: #fafafa;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 30px;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid #e5e7eb;
+            overflow-x: auto;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px 16px;
+            text-align: center;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            min-width: 130px;
+            color: #6b7280;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+        }
+
+        .tab:not(.active):hover {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .tab-content {
+            display: none;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* AI 번호 생성 섹션을 맨 위로 이동 */
+        .generate-hero {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+        }
+
+        .generate-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><text x="10" y="15" text-anchor="middle" fill="rgba(255,255,255,0.1)" font-size="12">✨</text></pattern></defs><rect fill="url(%23stars)" width="100" height="100"/></svg>');
+            animation: sparkle 15s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0% { transform: translateX(-20px) translateY(-20px) rotate(0deg); }
+            100% { transform: translateX(20px) translateY(20px) rotate(360deg); }
+        }
+
+        .generate-hero h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+        }
+
+        .generate-hero p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .generate-btn {
+            padding: 20px 50px;
+            background: linear-gradient(135deg, #ffffff 0%, #fef3c7 100%);
+            color: #d97706;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border: 2px solid #fbbf24;
+            position: relative;
+            z-index: 1;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #fef3c7 0%, #ffffff 100%);
+        }
+
+        .generate-btn:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        .ai-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 10px;
+            border: 1px solid #b91c1c;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .lottery-selector {
+            margin-bottom: 30px;
+        }
+
+        .lottery-selector label {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #1f2937;
+            font-size: 1.1rem;
+        }
+
+        .lottery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .lottery-option {
+            padding: 25px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lottery-option:hover {
+            border-color: #f59e0b;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.15);
+        }
+
+        .lottery-option.selected {
+            border-color: #f59e0b;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+        }
+
+        .lottery-name {
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: inherit;
+        }
+
+        .lottery-country {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .lottery-info {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-bottom: 12px;
+        }
+
+        .lottery-jackpot {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-top: 5px;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .lottery-option.selected .lottery-jackpot {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .trusted-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #059669;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .numbers-display {
+            margin-top: 30px;
+            margin-bottom: 30px; /* 추가된 여백 */
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 12px;
+            border: 2px solid #fbbf24;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .numbers-row {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .number-ball {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: white;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+            animation: bounceIn 0.6s ease-out;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0) rotate(180deg); opacity: 0; }
+            50% { transform: scale(1.1) rotate(90deg); opacity: 0.8; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .number-ball.main { 
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        .number-ball.bonus { 
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+        }
+
+        .statistics {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .stat-title {
+            font-weight: 600;
+            color: #f59e0b;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .history-list, .past-results {
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .history-list h4 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #f59e0b;
+            color: #d97706;
+        }
+
+        .history-list h4:first-child {
+            margin-top: 0;
+        }
+
+        .history-item, .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid #f3f4f6;
+            transition: all 0.2s ease;
+        }
+
+        .history-item:hover, .result-item:hover {
+            background: #f9fafb;
+        }
+
+        .history-numbers, .result-numbers {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .history-ball, .result-ball {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: white;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .history-ball.bonus, .result-ball.bonus {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            border-color: rgba(220, 38, 38, 0.3);
+        }
+
+        .probability-card {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            border: 1px solid #047857;
+        }
+
+        .probability-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .probability-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .result-date {
+            font-weight: 600;
+            color: #374151;
+            min-width: 100px;
+            font-size: 0.9rem;
+        }
+
+        .result-prize {
+            font-weight: 600;
+            color: #059669;
+            min-width: 100px;
+            text-align: right;
+            font-size: 0.9rem;
+        }
+
+        .current-game-info {
+            background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+            border: 1px solid #0e7490;
+        }
+
+        .current-game-info h3 {
+            margin-bottom: 8px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .game-selector {
+            margin-bottom: 20px;
+        }
+
+        .game-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .game-select:focus {
+            outline: none;
+            border-color: #f59e0b;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        .error-message {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 12px 0;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .success-message {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #16a34a;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 12px 0;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 12px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 25px 20px;
+            }
+            
+            .lottery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                min-width: auto;
+                margin-bottom: 4px;
+            }
+
+            .numbers-row {
+                gap: 8px;
+            }
+
+            .number-ball {
+                width: 45px;
+                height: 45px;
+                font-size: 1rem;
+            }
+
+            .result-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .result-prize {
+                text-align: left;
+            }
+
+            .generate-btn {
+                padding: 16px 32px;
+                font-size: 1.1rem;
+            }
+
+            .generate-hero {
+                padding: 25px 20px;
+            }
+
+            .generate-hero h2 {
+                font-size: 1.5rem;
+            }
+
+            .probability-value {
+                font-size: 1.5rem;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .lucky-numbers {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            border: 1px solid #047857;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #f59e0b;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 15px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f0fdf4;
+            color: #16a34a;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid #bbf7d0;
+            margin-top: 15px;
+        }
+
+        .professional-note {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #64748b;
+            text-align: center;
+        }
+
+        .selected-game-indicator {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div id="language-selector"></div>
+            <h1 data-translate="headerTitle">🎲 복권 번호 생성기</h1>
+            <p data-translate="headerSubtitle">AI 기반 로또 번호 추천 및 통계 분석 플랫폼</p>
+            <div class="security-badge">
+                🔒 <span data-translate="secureService">안전한 서비스</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Tabs -->
+            <div class="tabs">
+                <div class="tab active" data-tab="generator" data-translate="generatorTab">번호 생성</div>
+                <div class="tab" data-tab="past-results" data-translate="pastResultsTab">과거 당첨번호</div>
+                <div class="tab" data-tab="analysis" data-translate="analysisTab">통계 분석</div>
+                <div class="tab" data-tab="history" data-translate="historyTab">생성 기록</div>
+                <div class="tab" data-tab="probability" data-translate="probabilityTab">당첨 확률</div>
+            </div>
+
+            <!-- Number Generator Tab -->
+            <div id="generator-tab" class="tab-content active">
+                <div class="generate-hero">
+                    <h2 data-translate="generateHeroTitle">🎯 AI 행운 번호 생성</h2>
+                    <p data-translate="generateHeroDesc">통계적 분석을 바탕으로 최적의 당첨 번호를 생성합니다</p>
+                    <button class="generate-btn" onclick="generateNumbers()" data-translate="generateBtn">
+                        ✨ 지금 생성하기
+                        <span class="ai-badge" data-translate="aiBadge">AI</span>
+                    </button>
+                </div>
+
+                <!-- [수정] 생성된 번호 표시 영역을 이 위치로 이동 -->
+                <div id="numbers-display" class="numbers-display hidden">
+                    <h3 data-translate="generatedNumbers">생성된 번호</h3>
+                    <div id="main-numbers" class="numbers-row"></div>
+                    <div id="bonus-numbers" class="numbers-row"></div>
+                    <div class="lucky-numbers">
+                        <h4 data-translate="luckyMessage">🍀 행운의 번호가 생성되었습니다!</h4>
+                        <p data-translate="goodLuck">통계적 분석을 바탕으로 생성된 최적의 번호입니다</p>
+                    </div>
+                </div>
+
+                <div class="selected-game-indicator" id="selected-game-display">
+                    <span data-translate="currentGame">현재 선택:</span> <span id="current-selected-game">로또 6/45</span>
+                </div>
+
+                <div class="lottery-selector">
+                    <label data-translate="selectLottery">복권 게임 선택:</label>
+                    <div class="lottery-grid" id="lottery-grid"></div>
+                </div>
+
+                <div class="professional-note">
+                    <span data-translate="disclaimer">본 서비스는 통계적 분석을 통한 참고용 번호 생성 도구입니다. 당첨을 보장하지 않으며, 책임감 있는 게임을 권장합니다.</span>
+                </div>
+            </div>
+
+            <!-- Past Results Tab -->
+            <div id="past-results-tab" class="tab-content">
+                <h3 data-translate="pastResultsTitle">과거 당첨 번호</h3>
+                <div class="game-selector">
+                    <label data-translate="selectLottery"></label>
+                    <select class="game-select" id="past-game-selector" onchange="loadPastResults()"></select>
+                </div>
+                <div class="past-results" id="past-results-list"></div>
+            </div>
+
+            <!-- Analysis Tab -->
+            <div id="analysis-tab" class="tab-content">
+                <h3 data-translate="statisticalAnalysis">통계 분석</h3>
+                <!-- [수정] 통계분석 탭에 게임 선택 드롭다운 추가 -->
+                <div class="game-selector">
+                    <label data-translate="selectLottery"></label>
+                    <select class="game-select" id="analysis-game-selector" onchange="updateStatistics()"></select>
+                </div>
+                <div class="statistics" id="statistics"></div>
+            </div>
+
+            <!-- History Tab -->
+            <div id="history-tab" class="tab-content">
+                <h3 data-translate="generationHistory">생성 기록</h3>
+                <div class="history-list" id="history-list"></div>
+            </div>
+
+            <!-- Probability Tab -->
+            <div id="probability-tab" class="tab-content">
+                <h3 data-translate="winningProbability">당첨 확률 계산</h3>
+                 <!-- [수정] 당첨확률 탭에 게임 선택 드롭다운 추가 -->
+                <div class="game-selector">
+                     <label data-translate="selectLottery"></label>
+                    <select class="game-select" id="probability-game-selector" onchange="updateProbability()"></select>
+                </div>
+                <div class="probability-card">
+                    <div class="probability-title" data-translate="jackpotOdds">1등 당첨 확률</div>
+                    <div class="probability-value" id="probability-value"></div>
+                    <p data-translate="probabilityNote" id="probabilityNote"></p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const lotteryGames = {
+        powerball: {
+            names: { ko: '파워볼', en: 'Powerball', ja: 'パワーボール', zh: '强力球', es: 'Powerball', fr: 'Powerball', de: 'Powerball', ru: 'Powerball', pt: 'Powerball', id: 'Powerball', hi: 'पॉवरबॉल', ar: 'باوربول' },
+            countries: { ko: '미국', en: 'United States', ja: 'アメリカ合衆国', zh: '美国', es: 'Estados Unidos', fr: 'États-Unis', de: 'Vereinigte Staaten', ru: 'США', pt: 'Estados Unidos', id: 'Amerika Serikat', hi: 'संयुक्त राज्य अमेरिका', ar: 'الولايات المتحدة' },
+            infos: { ko: '5개 번호 + 1 파워볼', en: '5 numbers + 1 Powerball', ja: '5個の数字 + 1 パワーボール', zh: '5个号码 + 1强力球', es: '5 números + 1 Powerball', fr: '5 numéros + 1 Powerball', de: '5 Zahlen + 1 Powerball', ru: '5 номеров + 1 Powerball', pt: '5 números + 1 Powerball', id: '5 nomor + 1 Powerball', hi: '5 नंबर + 1 पॉवरबॉल', ar: '5 أرقام + 1 باوربول' },
+            mainNumbers: { min: 1, max: 69, count: 5 },
+            bonusNumbers: { min: 1, max: 26, count: 1 },
+            probability: '1 : 292,201,338',
+            jackpot: '$700M+',
+        },
+        megamillions: {
+            names: { ko: '메가밀리언', en: 'Mega Millions', ja: 'メガ・ミリオンズ', zh: '超级百万', es: 'Mega Millions', fr: 'Mega Millions', de: 'Mega Millions', ru: 'Mega Millions', pt: 'Mega Millions', id: 'Mega Millions', hi: 'मेगा मिलियन्स', ar: 'ميجا مليونز' },
+            countries: { ko: '미국', en: 'United States', ja: 'アメリカ合衆国', zh: '美国', es: 'Estados Unidos', fr: 'États-Unis', de: 'Vereinigte Staaten', ru: 'США', pt: 'Estados Unidos', id: 'Amerika Serikat', hi: 'संयुक्त राज्य अमेरिका', ar: 'الولايات المتحدة' },
+            infos: { ko: '5개 번호 + 1 메가볼', en: '5 numbers + 1 Mega Ball', ja: '5個の数字 + 1 メガボール', zh: '5个号码 + 1超级百万球', es: '5 números + 1 Mega Ball', fr: '5 numéros + 1 Mega Ball', de: '5 Zahlen + 1 Mega Ball', ru: '5 номеров + 1 Mega Ball', pt: '5 números + 1 Mega Ball', id: '5 nomor + 1 Mega Ball', hi: '5 नंबर + 1 मेगा बॉल', ar: '5 أرقام + 1 ميجا بول' },
+            mainNumbers: { min: 1, max: 70, count: 5 },
+            bonusNumbers: { min: 1, max: 25, count: 1 },
+            probability: '1 : 302,575,350',
+            jackpot: '$500M+',
+        },
+        euromillions: {
+            names: { ko: '유로밀리언', en: 'EuroMillions', ja: 'ユーロミリオンズ', zh: '欧洲百万', es: 'EuroMillones', fr: 'EuroMillions', de: 'EuroMillionen', ru: 'Евромиллионы', pt: 'EuroMilhões', id: 'EuroMillions', hi: 'यूरोमिलियन्स', ar: 'يورو مليونز' },
+            countries: { ko: '유럽연합', en: 'European Union', ja: '欧州連合', zh: '欧盟', es: 'Unión Europea', fr: 'Union européenne', de: 'Europäische Union', ru: 'Европейский Союз', pt: 'União Europeia', id: 'Uni Eropa', hi: 'यूरोपीय संघ', ar: 'الاتحاد الأوروبي' },
+            infos: { ko: '5개 번호 + 2 럭키스타', en: '5 numbers + 2 Lucky Stars', ja: '5個の数字 + 2個のラッキースター', zh: '5个主号码 + 2个幸运星', es: '5 números + 2 Estrellas', fr: '5 numéros + 2 Étoiles', de: '5 Zahlen + 2 Sterne', ru: '5 номеров + 2 счастливые звезды', pt: '5 números + 2 Estrelas da Sorte', id: '5 nomor + 2 Bintang Keberuntungan', hi: '5 नंबर + 2 लकी स्टार्स', ar: '5 أرقام + 2 نجمة حظ' },
+            mainNumbers: { min: 1, max: 50, count: 5 },
+            bonusNumbers: { min: 1, max: 12, count: 2 },
+            probability: '1 : 139,838,160',
+            jackpot: '€200M+',
+        },
+        koreaLotto: {
+            names: { ko: '로또 6/45', en: 'Lotto 6/45', ja: 'ロト6/45', zh: '乐透 6/45', es: 'Lotto 6/45', fr: 'Loto 6/45', de: 'Lotto 6/45', ru: 'Лото 6/45', pt: 'Lotto 6/45', id: 'Lotto 6/45', hi: 'लोट्टो 6/45', ar: 'لوتو 6/45' },
+            countries: { ko: '대한민국', en: 'South Korea', ja: '大韓民国', zh: '韩国', es: 'Corea del Sur', fr: 'Corée du Sud', de: 'Südkorea', ru: 'Южная Корея', pt: 'Coreia do Sul', id: 'Korea Selatan', hi: 'दक्षिण कोरिया', ar: 'كوريا الجنوبية' },
+            infos: { ko: '6개 번호 + 보너스', en: '6 numbers + Bonus', ja: '6個の数字 + ボーナス', zh: '6个号码 + 奖励号码', es: '6 números + Bono', fr: '6 numéros + Bonus', de: '6 Zahlen + Bonus', ru: '6 номеров + Бонус', pt: '6 números + Bônus', id: '6 nomor + Bonus', hi: '6 नंबर + बोनस', ar: '6 أرقام + بونص' },
+            mainNumbers: { min: 1, max: 45, count: 6 },
+            bonusNumbers: { min: 1, max: 45, count: 1 },
+            probability: '1 : 8,145,060',
+            jackpot: '₩30억+',
+        },
+        chinaLotto: {
+            names: { ko: '쌍색구', en: 'Union Lotto', ja: '双色球', zh: '双色球', es: 'Lotería de la Unión', fr: 'Union Lotto', de: 'Union Lotto', ru: 'Union Lotto', pt: 'Loto da União', id: 'Union Lotto', hi: 'यूनियन लोट्टो', ar: 'يونين لوتو' },
+            countries: { ko: '중국', en: 'China', ja: '中国', zh: '中国', es: 'China', fr: 'Chine', de: 'China', ru: 'Китай', pt: 'China', id: 'Cina', hi: 'चीन', ar: 'الصين' },
+            infos: { ko: '6 + 1 쌍색구', en: '6 + 1 Union Lotto', ja: '6 + 1 双色球', zh: '6 + 1 双色球', es: '6 + 1 Lotería de la Unión', fr: '6 + 1 Union Lotto', de: '6 + 1 Union Lotto', ru: '6 + 1 Union Lotto', pt: '6 + 1 Loto da União', id: '6 + 1 Union Lotto', hi: '6 + 1 यूनियन लोट्टो', ar: '6 + 1 يونين لوتو' },
+            mainNumbers: { min: 1, max: 33, count: 6 },
+            bonusNumbers: { min: 1, max: 16, count: 1 },
+            probability: '1 : 17,721,088',
+            jackpot: '¥50M+',
+        },
+        japanLotto: {
+            names: { ko: '로토6', en: 'Loto 6', ja: 'ロト6', zh: 'Loto 6', es: 'Loto 6', fr: 'Loto 6', de: 'Loto 6', ru: 'Лото 6', pt: 'Loto 6', id: 'Loto 6', hi: 'लोटो 6', ar: 'لوتو 6' },
+            countries: { ko: '일본', en: 'Japan', ja: '日本', zh: '日本', es: 'Japón', fr: 'Japon', de: 'Japan', ru: 'Япония', pt: 'Japão', id: 'Jepang', hi: 'जापान', ar: 'اليابان' },
+            infos: { ko: '6개 번호', en: '6 numbers', ja: '6個の数字', zh: '6个号码', es: '6 números', fr: '6 numéros', de: '6 Zahlen', ru: '6 номеров', pt: '6 números', id: '6 nomor', hi: '6 नंबर', ar: '6 أرقام' },
+            mainNumbers: { min: 1, max: 43, count: 6 },
+            bonusNumbers: { min: 1, max: 43, count: 1 },
+            probability: '1 : 6,096,454',
+            jackpot: '¥600M+',
+        }
+    };
+
+    // [수정] 과거 당첨번호 데이터 확장
+    const pastResults = {
+        powerball: [
+            { date: '2025-07-03', numbers: [7, 12, 24, 33, 49], bonus: [18], prize: '$850M' },
+            { date: '2025-06-29', numbers: [3, 8, 15, 27, 42], bonus: [9], prize: '$720M' },
+            { date: '2025-06-26', numbers: [11, 19, 23, 35, 44], bonus: [22], prize: '$680M' },
+            { date: '2025-06-22', numbers: [5, 16, 28, 31, 47], bonus: [14], prize: '$620M' },
+            { date: '2025-06-19', numbers: [9, 17, 25, 39, 52], bonus: [6], prize: '$580M' }
+        ],
+        megamillions: [
+            { date: '2025-07-02', numbers: [8, 14, 26, 41, 58], bonus: [12], prize: '$520M' },
+            { date: '2025-06-28', numbers: [2, 19, 31, 45, 62], bonus: [7], prize: '$480M' },
+            { date: '2025-06-25', numbers: [13, 22, 37, 49, 66], bonus: [15], prize: '$440M' },
+            { date: '2025-06-21', numbers: [6, 18, 29, 43, 61], bonus: [3], prize: '$400M' },
+            { date: '2025-06-18', numbers: [11, 24, 34, 47, 69], bonus: [21], prize: '$380M' }
+        ],
+        euromillions: [
+            { date: '2025-07-01', numbers: [4, 16, 23, 38, 47], bonus: [5, 9], prize: '€180M' },
+            { date: '2025-06-27', numbers: [7, 19, 31, 42, 49], bonus: [2, 11], prize: '€160M' },
+            { date: '2025-06-24', numbers: [12, 25, 33, 41, 46], bonus: [6, 8], prize: '€140M' },
+            { date: '2025-06-20', numbers: [3, 17, 28, 39, 44], bonus: [1, 12], prize: '€120M' },
+            { date: '2025-06-17', numbers: [9, 21, 35, 43, 50], bonus: [4, 10], prize: '€110M' }
+        ],
+        koreaLotto: [
+            { date: '2025-07-04', numbers: [8, 15, 23, 31, 37, 42], bonus: [19], prize: '₩28억' },
+            { date: '2025-06-27', numbers: [3, 12, 18, 26, 39, 44], bonus: [7], prize: '₩32억' },
+            { date: '2025-06-20', numbers: [5, 14, 21, 29, 35, 41], bonus: [16], prize: '₩25억' },
+            { date: '2025-06-13', numbers: [9, 17, 24, 32, 38, 45], bonus: [2], prize: '₩30억' },
+            { date: '2025-06-06', numbers: [6, 13, 22, 28, 36, 43], bonus: [11], prize: '₩27억' }
+        ],
+        chinaLotto: [
+            { date: '2025-07-03', numbers: [3, 8, 15, 22, 28, 31], bonus: [12], prize: '¥45M' },
+            { date: '2025-06-29', numbers: [5, 11, 19, 25, 30, 33], bonus: [8], prize: '¥38M' },
+            { date: '2025-06-26', numbers: [2, 14, 21, 27, 29, 32], bonus: [15], prize: '¥42M' },
+            { date: '2025-06-22', numbers: [7, 12, 18, 24, 26, 31], bonus: [4], prize: '¥35M' },
+            { date: '2025-06-19', numbers: [9, 16, 20, 23, 28, 33], bonus: [11], prize: '¥40M' }
+        ],
+        japanLotto: [
+            { date: '2025-07-04', numbers: [6, 14, 21, 28, 35, 41], bonus: [18], prize: '¥580M' },
+            { date: '2025-06-27', numbers: [3, 12, 19, 26, 33, 40], bonus: [9], prize: '¥520M' },
+            { date: '2025-06-20', numbers: [8, 15, 22, 29, 36, 43], bonus: [5], prize: '¥480M' },
+            { date: '2025-06-13', numbers: [2, 11, 18, 25, 32, 39], bonus: [16], prize: '¥600M' },
+            { date: '2025-06-06', numbers: [7, 13, 20, 27, 34, 42], bonus: [24], prize: '¥550M' }
+        ]
+    };
+
+    let selectedLottery = 'koreaLotto';
+    let generationHistory = JSON.parse(localStorage.getItem('lotteryHistory') || '[]');
+    let currentLang = 'ko';
+
+    const translations = {
+        ko: { langCode: "ko", dir: "ltr", allGames: "모든 게임", headerTitle: "🎲 복권 번호 생성기", headerSubtitle: "AI 기반 로또 번호 추천 및 통계 분석 플랫폼", secureService: "안전한 서비스", generateHeroTitle: "🎯 AI 행운 번호 생성", generateHeroDesc: "통계적 분석을 바탕으로 최적의 당첨 번호를 생성합니다", currentGame: "현재 선택:", generatorTab: "번호 생성", pastResultsTab: "과거 당첨번호", analysisTab: "통계 분석", historyTab: "생성 기록", probabilityTab: "당첨 확률", selectLottery: "복권 게임 선택:", generateBtn: "지금 생성하기", aiBadge: "AI", generatedNumbers: "생성된 번호", luckyMessage: "🍀 행운의 번호가 생성되었습니다!", goodLuck: "통계적 분석을 바탕으로 생성된 최적의 번호입니다", statisticalAnalysis: "통계 분석", generationHistory: "생성 기록", winningProbability: "당첨 확률 계산", jackpotOdds: "1등 당첨 확률", probabilityNote: "선택한 복권 게임의 1등 당첨 확률입니다", totalGenerated: "총 생성 횟수", favoriteNumber: "최다 생성 번호", lastGenerated: "최근 생성", avgSum: "평균 번호 합", pastResultsTitle: "과거 당첨 번호", pastResultsDesc: "과거 당첨 번호를 확인하고 패턴을 분석해보세요", drawDate: "추첨일", winningNumbers: "당첨 번호", jackpot: "1등 상금", disclaimer: "본 서비스는 통계적 분석을 통한 참고용 번호 생성 도구입니다. 당첨을 보장하지 않으며, 책임감 있는 게임을 권장합니다.", trustedBadge: "인증", noData:"데이터가 없습니다.", noHistory:"생성된 기록이 없습니다." },
+        en: { langCode: "en", dir: "ltr", allGames: "All Games", headerTitle: "🎲 Lottery Number Generator", headerSubtitle: "AI-Powered Lottery Number Recommendations & Statistical Analysis Platform", secureService: "Secure Service", generateHeroTitle: "🎯 AI Lucky Number Generation", generateHeroDesc: "Generate optimal winning numbers based on statistical analysis", currentGame: "Currently Selected:", generatorTab: "Generator", pastResultsTab: "Past Results", analysisTab: "Analysis", historyTab: "History", probabilityTab: "Probability", selectLottery: "Select Lottery Game:", generateBtn: "Generate Now", aiBadge: "AI", generatedNumbers: "Generated Numbers", luckyMessage: "🍀 Lucky numbers generated!", goodLuck: "Optimal numbers generated based on statistical analysis", statisticalAnalysis: "Statistical Analysis", generationHistory: "Generation History", winningProbability: "Winning Probability", jackpotOdds: "Jackpot Odds", probabilityNote: "Jackpot winning probability for selected lottery game", totalGenerated: "Total Generated", favoriteNumber: "Most Generated", lastGenerated: "Last Generated", avgSum: "Average Sum", pastResultsTitle: "Past Winning Numbers", pastResultsDesc: "Check past winning numbers and analyze patterns", drawDate: "Draw Date", winningNumbers: "Winning Numbers", jackpot: "Jackpot Prize", disclaimer: "This service is a reference number generation tool based on statistical analysis. It does not guarantee winning and encourages responsible gaming.", trustedBadge: "Verified", noData:"No data available.", noHistory:"No generation history." },
+        ja: { langCode: "ja", dir: "ltr", allGames: "すべてのゲーム", headerTitle: "🎲 宝くじ番号ジェネレーター", headerSubtitle: "AI基盤のロト番号推薦および統計分析プラットフォーム", secureService: "安全なサービス", generateHeroTitle: "🎯 AI幸運番号生成", generateHeroDesc: "統計的分析に基づいて最適な当選番号を生成します", currentGame: "現在選択中:", generatorTab: "番号生成", pastResultsTab: "過去の当選番号", analysisTab: "統計分析", historyTab: "生成履歴", probabilityTab: "当選確率", selectLottery: "宝くじゲームを選択:", generateBtn: "今すぐ生成", aiBadge: "AI", generatedNumbers: "生成された番号", luckyMessage: "🍀 幸運の番号が生成されました！", goodLuck: "統計的分析に基づいて生成された最適の番号です", statisticalAnalysis: "統計分析", generationHistory: "生成履歴", winningProbability: "当選確率計算", jackpotOdds: "1等当選確率", probabilityNote: "選択した宝くじゲームの1等当選確率です", totalGenerated: "総生成回数", favoriteNumber: "最多生成番号", lastGenerated: "最終生成", avgSum: "平均番号合計", pastResultsTitle: "過去の当選番号", pastResultsDesc: "過去の当選番号を確認し、パターンを分析します", drawDate: "抽選日", winningNumbers: "当選番号", jackpot: "1等賞金", disclaimer: "本サービスは統計的分析による参考用の番号生成ツールです。当選を保証するものではなく、責任あるゲームをお勧めします。", trustedBadge: "認証済み", noData:"データがありません。", noHistory:"生成履歴がありません。" },
+        zh: { langCode: "zh", dir: "ltr", allGames: "所有游戏", headerTitle: "🎲 彩票号码生成器", headerSubtitle: "基于AI的乐透号码推荐和统计分析平台", secureService: "安全服务", generateHeroTitle: "🎯 AI幸运号码生成", generateHeroDesc: "基于统计分析生成最佳中奖号码", currentGame: "当前选择:", generatorTab: "号码生成", pastResultsTab: "历史开奖号码", analysisTab: "统计分析", historyTab: "生成历史", probabilityTab: "中奖概率", selectLottery: "选择彩票游戏:", generateBtn: "立即生成", aiBadge: "AI", generatedNumbers: "生成的号码", luckyMessage: "🍀 幸运号码已生成！", goodLuck: "基于统计分析生成的最佳号码", statisticalAnalysis: "统计分析", generationHistory: "生成历史", winningProbability: "中奖概率计算", jackpotOdds: "头奖中奖概率", probabilityNote: "所选彩票游戏的头奖中奖概率", totalGenerated: "总生成次数", favoriteNumber: "最常生成号码", lastGenerated: "最近生成", avgSum: "平均号码总和", pastResultsTitle: "历史开奖号码", pastResultsDesc: "查看历史中奖号码并分析模式", drawDate: "开奖日期", winningNumbers: "中奖号码", jackpot: "头奖奖金", disclaimer: "本服务是基于统计分析的参考号码生成工具。不保证中奖，建议负责任地游戏。", trustedBadge: "已认证", noData:"没有数据。", noHistory:"没有生成历史。" },
+        es: { langCode: "es", dir: "ltr", allGames: "Todos los juegos", headerTitle: "🎲 Generador de Números de Lotería", headerSubtitle: "Plataforma de recomendación de números de lotería y análisis estadístico basada en IA", secureService: "Servicio Seguro", generateHeroTitle: "🎯 Generación de Números de la Suerte con IA", generateHeroDesc: "Genere números ganadores óptimos basados en análisis estadístico", currentGame: "Seleccionado actualmente:", generatorTab: "Generador", pastResultsTab: "Resultados Anteriores", analysisTab: "Análisis", historyTab: "Historial", probabilityTab: "Probabilidad", selectLottery: "Seleccionar Juego de Lotería:", generateBtn: "Generar Ahora", aiBadge: "IA", generatedNumbers: "Números Generados", luckyMessage: "🍀 ¡Números de la suerte generados!", goodLuck: "Números óptimos generados basados en análisis estadístico", statisticalAnalysis: "Análisis Estadístico", generationHistory: "Historial de Generación", winningProbability: "Probabilidad de Ganar", jackpotOdds: "Probabilidades del Bote", probabilityNote: "Probabilidad de ganar el premio mayor para el juego de lotería seleccionado", totalGenerated: "Total Generado", favoriteNumber: "Número Más Generado", lastGenerated: "Último Generado", avgSum: "Suma Promedio", pastResultsTitle: "Números Ganadores Anteriores", pastResultsDesc: "Verifique los números ganadores anteriores y analice patrones", drawDate: "Fecha del Sorteo", winningNumbers: "Números Ganadores", jackpot: "Premio Mayor", disclaimer: "Este servicio es una herramienta de generación de números de referencia basada en análisis estadístico. No garantiza ganar y fomenta el juego responsable.", trustedBadge: "Verificado", noData:"No hay datos disponibles.", noHistory:"No hay historial de generación." },
+        fr: { langCode: "fr", dir: "ltr", allGames: "Tous les jeux", headerTitle: "🎲 Générateur de Numéros de Loterie", headerSubtitle: "Plateforme de recommandation de numéros de loto et d'analyse statistique basée sur l'IA", secureService: "Service Sécurisé", generateHeroTitle: "🎯 Génération de Numéros Chanceux par IA", generateHeroDesc: "Générez des numéros gagnants optimaux basés sur une analyse statistique", currentGame: "Sélection actuelle :", generatorTab: "Générateur", pastResultsTab: "Résultats Précédents", analysisTab: "Analyse", historyTab: "Historique", probabilityTab: "Probabilité", selectLottery: "Sélectionner un jeu de loterie :", generateBtn: "Générer Maintenant", aiBadge: "IA", generatedNumbers: "Numéros Générés", luckyMessage: "🍀 Numéros chanceux générés !", goodLuck: "Numéros optimaux générés sur la base d'une analyse statistique", statisticalAnalysis: "Analyse Statistique", generationHistory: "Historique de Génération", winningProbability: "Probabilité de Gagner", jackpotOdds: "Chances de Jackpot", probabilityNote: "Probabilité de gagner le jackpot pour le jeu de loterie sélectionné", totalGenerated: "Total Généré", favoriteNumber: "Numéro le Plus Généré", lastGenerated: "Dernier Généré", avgSum: "Somme Moyenne", pastResultsTitle: "Numéros Gagnants Précédents", pastResultsDesc: "Consultez les numéros gagnants précédents et analysez les tendances", drawDate: "Date du Tirage", winningNumbers: "Numéros Gagnants", jackpot: "Gros Lot", disclaimer: "Ce service est un outil de génération de numéros de référence basé sur une analyse statistique. Il ne garantit pas de gain et encourage le jeu responsable.", trustedBadge: "Vérifié", noData:"Aucune donnée disponible.", noHistory:"Aucun historique de génération." },
+        de: { langCode: "de", dir: "ltr", allGames: "Alle Spiele", headerTitle: "🎲 Lottozahlengenerator", headerSubtitle: "KI-basierte Plattform für Lottozahlenempfehlungen und statistische Analysen", secureService: "Sicherer Dienst", generateHeroTitle: "🎯 KI-Glückszahlengenerierung", generateHeroDesc: "Generieren Sie optimale Gewinnzahlen basierend auf statistischer Analyse", currentGame: "Aktuell ausgewählt:", generatorTab: "Generator", pastResultsTab: "Vergangene Ergebnisse", analysisTab: "Analyse", historyTab: "Verlauf", probabilityTab: "Wahrscheinlichkeit", selectLottery: "Lottospiel auswählen:", generateBtn: "Jetzt generieren", aiBadge: "KI", generatedNumbers: "Generierte Zahlen", luckyMessage: "🍀 Glückszahlen generiert!", goodLuck: "Optimale Zahlen, die auf statistischer Analyse basieren", statisticalAnalysis: "Statistische Analyse", generationHistory: "Generierungsverlauf", winningProbability: "Gewinnwahrscheinlichkeit", jackpotOdds: "Jackpot-Quoten", probabilityNote: "Jackpot-Gewinnwahrscheinlichkeit für das ausgewählte Lottospiel", totalGenerated: "Insgesamt generiert", favoriteNumber: "Am häufigsten generiert", lastGenerated: "Zuletzt generiert", avgSum: "Durchschnittliche Summe", pastResultsTitle: "Vergangene Gewinnzahlen", pastResultsDesc: "Überprüfen Sie vergangene Gewinnzahlen und analysieren Sie Muster", drawDate: "Ziehungsdatum", winningNumbers: "Gewinnzahlen", jackpot: "Jackpot-Preis", disclaimer: "Dieser Dienst ist ein Referenznummern-Generierungstool, das auf statistischer Analyse basiert. Es garantiert keinen Gewinn und fördert verantwortungsvolles Spielen.", trustedBadge: "Verifiziert", noData:"Keine Daten verfügbar.", noHistory:"Kein Generierungsverlauf." },
+        ru: { langCode: "ru", dir: "ltr", allGames: "Все игры", headerTitle: "🎲 Генератор лотерейных номеров", headerSubtitle: "Платформа для рекомендаций лотерейных номеров и статистического анализа на базе ИИ", secureService: "Безопасный сервис", generateHeroTitle: "🎯 Генерация счастливых номеров с помощью ИИ", generateHeroDesc: "Создавайте оптимальные выигрышные номера на основе статистического анализа", currentGame: "Текущий выбор:", generatorTab: "Генератор", pastResultsTab: "Прошлые результаты", analysisTab: "Анализ", historyTab: "История", probabilityTab: "Вероятность", selectLottery: "Выберите лотерею:", generateBtn: "Сгенерировать сейчас", aiBadge: "ИИ", generatedNumbers: "Сгенерированные номера", luckyMessage: "🍀 Счастливые номера сгенерированы!", goodLuck: "Оптимальные номера, сгенерированные на основе статистического анализа", statisticalAnalysis: "Статистический анализ", generationHistory: "История генераций", winningProbability: "Вероятность выигрыша", jackpotOdds: "Шансы на джекпот", probabilityNote: "Вероятность выигрыша джекпота для выбранной лотереи", totalGenerated: "Всего сгенерировано", favoriteNumber: "Самый частый номер", lastGenerated: "Последняя генерация", avgSum: "Средняя сумма", pastResultsTitle: "Прошлые выигрышные номера", pastResultsDesc: "Проверьте прошлые выигрышные номера и проанализируйте закономерности", drawDate: "Дата розыгрыша", winningNumbers: "Выигрышные номера", jackpot: "Джекпот", disclaimer: "Этот сервис является инструментом для генерации справочных номеров на основе статистического анализа. Он не гарантирует выигрыш и призывает к ответственной игре.", trustedBadge: "Проверено", noData:"Нет данных.", noHistory:"Нет истории генерации." },
+        pt: { langCode: "pt", dir: "ltr", allGames: "Todos os jogos", headerTitle: "🎲 Gerador de Números de Loteria", headerSubtitle: "Plataforma de recomendação de números de loteria e análise estatística com base em IA", secureService: "Serviço Seguro", generateHeroTitle: "🎯 Geração de Números da Sorte com IA", generateHeroDesc: "Gere números vencedores ideais com base em análise estatística", currentGame: "Selecionado atualmente:", generatorTab: "Gerador", pastResultsTab: "Resultados Anteriores", analysisTab: "Análise", historyTab: "Histórico", probabilityTab: "Probabilidade", selectLottery: "Selecionar Jogo de Loteria:", generateBtn: "Gerar Agora", aiBadge: "IA", generatedNumbers: "Números Gerados", luckyMessage: "🍀 Números da sorte gerados!", goodLuck: "Números ideais gerados com base em análise estatística", statisticalAnalysis: "Análise Estatística", generationHistory: "Histórico de Geração", winningProbability: "Probabilidade de Ganhar", jackpotOdds: "Probabilidades do Jackpot", probabilityNote: "Probabilidade de ganhar o prêmio principal para o jogo de loteria selecionado", totalGenerated: "Total Gerado", favoriteNumber: "Número Mais Gerado", lastGenerated: "Último Gerado", avgSum: "Soma Média", pastResultsTitle: "Números Vencedores Anteriores", pastResultsDesc: "Verifique os números vencedores anteriores e analise padrões", drawDate: "Data do Sorteio", winningNumbers: "Números Vencedores", jackpot: "Prêmio Principal", disclaimer: "Este serviço é uma ferramenta de geração de números de referência baseada em análise estatística. Não garante vitória e incentiva o jogo responsável.", trustedBadge: "Verificado", noData:"Não há dados disponíveis.", noHistory:"Não há histórico de geração." },
+        id: { langCode: "id", dir: "ltr", allGames: "Semua permainan", headerTitle: "🎲 Generator Angka Lotere", headerSubtitle: "Platform rekomendasi angka lotere dan analisis statistik berbasis AI", secureService: "Layanan Aman", generateHeroTitle: "🎯 Pembuatan Angka Keberuntungan AI", generateHeroDesc: "Hasilkan angka kemenangan optimal berdasarkan analisis statistik", currentGame: "Saat ini Dipilih:", generatorTab: "Generator", pastResultsTab: "Hasil Sebelumnya", analysisTab: "Analisis", historyTab: "Riwayat", probabilityTab: "Probabilitas", selectLottery: "Pilih Game Lotere:", generateBtn: "Hasilkan Sekarang", aiBadge: "AI", generatedNumbers: "Angka yang Dihasilkan", luckyMessage: "🍀 Angka keberuntungan dihasilkan!", goodLuck: "Angka optimal yang dihasilkan berdasarkan analisis statistik", statisticalAnalysis: "Analisis Statistik", generationHistory: "Riwayat Pembuatan", winningProbability: "Probabilitas Kemenangan", jackpotOdds: "Peluang Jackpot", probabilityNote: "Probabilitas memenangkan jackpot untuk game lotere yang dipilih", totalGenerated: "Total Dihasilkan", favoriteNumber: "Angka Paling Sering", lastGenerated: "Terakhir Dihasilkan", avgSum: "Jumlah Rata-rata", pastResultsTitle: "Angka Pemenang Sebelumnya", pastResultsDesc: "Periksa angka pemenang sebelumnya dan analisis polanya", drawDate: "Tanggal Undian", winningNumbers: "Angka Pemenang", jackpot: "Hadiah Jackpot", disclaimer: "Layanan ini adalah alat pembuatan angka referensi berdasarkan analisis statistik. Ini tidak menjamin kemenangan dan mendorong permainan yang bertanggung jawab.", trustedBadge: "Terverifikasi", noData:"Tidak ada data.", noHistory:"Tidak ada riwayat pembuatan." },
+        hi: { langCode: "hi", dir: "ltr", allGames: "सभी खेल", headerTitle: "🎲 लॉटरी नंबर जेनरेटर", headerSubtitle: "एआई-आधारित लोट्टो नंबर सिफारिश और सांख्यिकीय विश्लेषण मंच", secureService: "सुरक्षित सेवा", generateHeroTitle: "🎯 एआई लकी नंबर जनरेशन", generateHeroDesc: "सांख्यिकीय विश्लेषण के आधार पर इष्टतम विजेता संख्याएँ उत्पन्न करें", currentGame: "वर्तमान में चयनित:", generatorTab: "जेनरेटर", pastResultsTab: "पिछले परिणाम", analysisTab: "विश्लेषण", historyTab: "इतिहास", probabilityTab: "संभावना", selectLottery: "लॉटरी खेल चुनें:", generateBtn: "अभी उत्पन्न करें", aiBadge: "एआई", generatedNumbers: "उत्पन्न संख्याएँ", luckyMessage: "🍀 भाग्यशाली संख्याएँ उत्पन्न हुईं!", goodLuck: "सांख्यिकीय विश्लेषण के आधार पर उत्पन्न इष्टतम संख्याएँ", statisticalAnalysis: "सांख्यिकीय विश्लेषण", generationHistory: "उत्पत्ति का इतिहास", winningProbability: "जीतने की संभावना", jackpotOdds: "जैकपॉट की संभावना", probabilityNote: "चयनित लॉटरी खेल के लिए जैकपॉट जीतने की संभावना", totalGenerated: "कुल उत्पन्न", favoriteNumber: "सबसे अधिक उत्पन्न", lastGenerated: "अंतिम उत्पन्न", avgSum: "औसत योग", pastResultsTitle: "पिछले विजेता नंबर", pastResultsDesc: "पिछले विजेता नंबरों की जाँच करें और पैटर्न का विश्लेषण करें", drawDate: "ड्रा की तारीख", winningNumbers: "विजेता संख्याएँ", jackpot: "जैकपॉट पुरस्कार", disclaimer: "यह सेवा सांख्यिकीय विश्लेषण पर आधारित एक संदर्भ संख्या निर्माण उपकरण है। यह जीतने की गारंटी नहीं देता है और जिम्मेदार गेमिंग को प्रोत्साहित करता है।", trustedBadge: "सत्यापित", noData:"कोई डेटा उपलब्ध नहीं है।", noHistory:"कोई सृजन इतिहास नहीं है।" },
+        ar: { langCode: "ar", dir: "rtl", allGames: "كل الألعاب", headerTitle: "🎲 مولد أرقام اليانصيب", headerSubtitle: "منصة توصيات أرقام اللوتو والتحليل الإحصائي القائمة على الذكاء الاصطناعي", secureService: "خدمة آمنة", generateHeroTitle: "🎯 توليد أرقام الحظ بالذكاء الاصطناعي", generateHeroDesc: "أنشئ أرقامًا فائزة مثلى بناءً على التحليل الإحصائي", currentGame: "المحدد حاليًا:", generatorTab: "المولد", pastResultsTab: "النتائج السابقة", analysisTab: "تحليل", historyTab: "السجل", probabilityTab: "الاحتمالية", selectLottery: "اختر لعبة اليانصيب:", generateBtn: "أنشئ الآن", aiBadge: "AI", generatedNumbers: "الأرقام التي تم إنشاؤها", luckyMessage: "🍀 تم إنشاء أرقام الحظ!", goodLuck: "أرقام مثلى تم إنشاؤها بناءً على التحليل الإحصائي", statisticalAnalysis: "تحليل إحصائي", generationHistory: "سجل الإنشاء", winningProbability: "احتمالية الفوز", jackpotOdds: "احتمالات الفوز بالجائزة الكبرى", probabilityNote: "احتمالية الفوز بالجائزة الكبرى للعبة اليانصيب المختارة", totalGenerated: "إجمالي ما تم إنشاؤه", favoriteNumber: "الأكثر إنشاءً", lastGenerated: "آخر إنشاء", avgSum: "المتوسط الحسابي", pastResultsTitle: "الأرقام الفائزة السابقة", pastResultsDesc: "تحقق من الأرقام الفائزة السابقة وحلل الأنماط", drawDate: "تاريخ السحب", winningNumbers: "الأرقام الفائزة", jackpot: "الجائزة الكبرى", disclaimer: "هذه الخدمة هي أداة لإنشاء أرقام مرجعية بناءً على التحليل الإحصائي. لا تضمن الفوز وتشجع على اللعب المسؤول.", trustedBadge: "تم التحقق", noData:"لا توجد بيانات.", noHistory:"لا يوجد سجل إنشاء." }
+    };
+
+    function getLotteryOrder(lang) {
+        const orders = {
+            ko: ['koreaLotto', 'japanLotto', 'chinaLotto', 'powerball', 'megamillions', 'euromillions'],
+            en: ['powerball', 'megamillions', 'euromillions', 'koreaLotto', 'japanLotto', 'chinaLotto'],
+            zh: ['chinaLotto', 'koreaLotto', 'japanLotto', 'powerball', 'megamillions', 'euromillions'],
+            ja: ['japanLotto', 'koreaLotto', 'chinaLotto', 'powerball', 'megamillions', 'euromillions'],
+        };
+        return orders[lang] || orders['en'];
+    }
+
+    function createLanguageSelector() {
+        const container = document.getElementById('language-selector');
+        const select = document.createElement('select');
+        select.id = 'lang-switcher';
+        
+        const langNames = {
+            'ko': '한국어', 'en': 'English', 'zh': '中文', 'es': 'Español',
+            'ar': 'العربية', 'pt': 'Português', 'hi': 'हिन्दी', 'id': 'Indonesia',
+            'de': 'Deutsch', 'fr': 'Français', 'ja': '日本語', 'ru': 'Русский'
+        };
+
+        Object.entries(langNames).forEach(([code, name]) => {
+            const option = document.createElement('option');
+            option.value = code;
+            option.textContent = name;
+            select.appendChild(option);
+        });
+        
+        select.value = currentLang;
+        select.addEventListener('change', (e) => setLanguage(e.target.value));
+        container.appendChild(select);
+    }
+
+    function setLanguage(lang) {
+        currentLang = lang;
+        const t = translations[lang] || translations['ko'];
+
+        document.documentElement.lang = t.langCode;
+        document.body.dir = t.dir;
+
+        document.querySelectorAll('[data-translate]').forEach(el => {
+            const key = el.getAttribute('data-translate');
+            if (t[key]) {
+                if (key === 'generateBtn' && el.querySelector('.ai-badge')) {
+                    const badgeText = translations[currentLang].aiBadge || "AI";
+                    el.innerHTML = `✨ ${t[key]} <span class="ai-badge">${badgeText}</span>`;
+                } else {
+                    el.textContent = t[key];
+                }
+            }
+        });
+        
+        document.querySelectorAll('.game-selector label').forEach(label => {
+            label.textContent = t.selectLottery;
+        });
+
+        const order = getLotteryOrder(lang);
+        selectedLottery = order[0];
+
+        updateAllDynamicContent();
+    }
+    
+    function updateAllDynamicContent() {
+        updateLotteryGrid();
+        updateGameSelectors();
+        updateSelectedGameDisplay();
+        loadPastResults();
+        updateStatistics();
+        updateHistory();
+        updateProbability();
+    }
+    
+    // [수정] 여러 탭의 게임 선택기를 한번에 업데이트하는 함수
+    function updateGameSelectors() {
+        const selectors = ['past-game-selector', 'analysis-game-selector', 'probability-game-selector'];
+        const order = getLotteryOrder(currentLang);
+
+        selectors.forEach(selectorId => {
+            const selector = document.getElementById(selectorId);
+            if (!selector) return;
+
+            const selectedValue = selector.value || order[0];
+            selector.innerHTML = '';
+            
+            if (selectorId === 'analysis-game-selector') {
+                const allOption = document.createElement('option');
+                allOption.value = 'all';
+                allOption.textContent = translations[currentLang].allGames || 'All Games';
+                selector.appendChild(allOption);
+            }
+
+            order.forEach(key => {
+                const game = lotteryGames[key];
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = game.names[currentLang] || game.names.en;
+                selector.appendChild(option);
+            });
+            
+            if (selector.querySelector(`option[value="${selectedValue}"]`)) {
+                 selector.value = selectedValue;
+            } else {
+                 selector.value = (selectorId === 'analysis-game-selector') ? 'all' : order[0];
+            }
+        });
+    }
+
+    function updateSelectedGameDisplay() {
+        const game = lotteryGames[selectedLottery];
+        if (!game) return;
+        const t = translations[currentLang];
+        document.getElementById('current-selected-game').textContent = game.names[currentLang] || game.names.en;
+        document.querySelector('#selected-game-display > span[data-translate="currentGame"]').textContent = t.currentGame;
+    }
+
+    function updateLotteryGrid() {
+        const grid = document.getElementById('lottery-grid');
+        grid.innerHTML = '';
+        const order = getLotteryOrder(currentLang);
+        
+        order.forEach(key => {
+            const game = lotteryGames[key];
+            if (!game) return;
+
+            const option = document.createElement('div');
+            option.className = `lottery-option ${key === selectedLottery ? 'selected' : ''}`;
+            option.dataset.lotteryKey = key;
+            
+            const gameName = game.names[currentLang] || game.names.en;
+            const countryName = game.countries[currentLang] || game.countries.en;
+            const infoText = game.infos[currentLang] || game.infos.en;
+            const badgeText = translations[currentLang].trustedBadge || "Verified";
+
+            option.innerHTML = `
+                <div class="trusted-badge">${badgeText}</div>
+                <div class="lottery-name">${gameName}</div>
+                <div class="lottery-country">${countryName}</div>
+                <div class="lottery-info">${infoText}</div>
+                <div class="lottery-jackpot">${game.jackpot}</div>
+            `;
+            
+            option.onclick = () => selectLottery(key);
+            grid.appendChild(option);
+        });
+    }
+    
+    function selectLottery(key) {
+        selectedLottery = key;
+        document.querySelectorAll('.lottery-option').forEach(el => {
+            el.classList.toggle('selected', el.dataset.lotteryKey === key);
+        });
+        updateSelectedGameDisplay();
+    }
+
+    // [수정] 함수가 해당 탭의 드롭다운 값을 사용하도록 변경
+    function loadPastResults() {
+        const selector = document.getElementById('past-game-selector');
+        if (!selector) return;
+
+        const selectedGame = selector.value;
+        const results = pastResults[selectedGame] || [];
+        const container = document.getElementById('past-results-list');
+        
+        if (results.length === 0) {
+            container.innerHTML = `<p style="text-align: center; padding: 40px; color: #6b7280;">${translations[currentLang].noData}</p>`;
+            return;
+        }
+
+        container.innerHTML = results.map(result => {
+            const mainBalls = result.numbers.map(num => `<div class="result-ball">${num}</div>`).join('');
+            const bonusBalls = result.bonus ? result.bonus.map(num => `<div class="result-ball bonus">${num}</div>`).join('') : '';
+            return `<div class="result-item"><div class="result-date">${result.date}</div><div class="result-numbers">${mainBalls}${bonusBalls}</div><div class="result-prize">${result.prize}</div></div>`;
+        }).join('');
+    }
+
+    function generateNumbers() {
+        const game = lotteryGames[selectedLottery];
+        const loading = document.createElement('div');
+        loading.className = 'loading';
+        const generateBtn = document.querySelector('.generate-btn');
+        const originalText = generateBtn.innerHTML;
+        generateBtn.innerHTML = '';
+        generateBtn.appendChild(loading);
+        generateBtn.disabled = true;
+
+        setTimeout(() => {
+            const mainNumbers = generateSmartNumbers(game.mainNumbers);
+            let bonusNumbers = [];
+            if (game.bonusNumbers) bonusNumbers = generateSmartNumbers(game.bonusNumbers);
+            
+            displayNumbers(mainNumbers, bonusNumbers);
+            saveToHistory(mainNumbers, bonusNumbers);
+            updateStatistics();
+            
+            generateBtn.innerHTML = originalText;
+            generateBtn.disabled = false;
+        }, 1500);
+    }
+    
+    function generateSmartNumbers(config) {
+        if (!config) return [];
+        const numbers = [];
+        while (numbers.length < config.count) {
+            const num = Math.floor(Math.random() * (config.max - config.min + 1)) + config.min;
+            if (!numbers.includes(num)) numbers.push(num);
+        }
+        return numbers.sort((a, b) => a - b);
+    }
+
+    function displayNumbers(mainNumbers, bonusNumbers) {
+        const displayContainer = document.getElementById('numbers-display');
+        const mainContainer = document.getElementById('main-numbers');
+        const bonusContainer = document.getElementById('bonus-numbers');
+        mainContainer.innerHTML = '';
+        bonusContainer.innerHTML = '';
+
+        mainNumbers.forEach((num, index) => {
+            setTimeout(() => {
+                const ball = document.createElement('div');
+                ball.className = 'number-ball main';
+                ball.textContent = num;
+                mainContainer.appendChild(ball);
+            }, index * 150);
+        });
+
+        if (bonusNumbers && bonusNumbers.length > 0) {
+            setTimeout(() => {
+                bonusNumbers.forEach((num, index) => {
+                    setTimeout(() => {
+                        const ball = document.createElement('div');
+                        ball.className = 'number-ball bonus';
+                        ball.textContent = num;
+                        bonusContainer.appendChild(ball);
+                    }, index * 150);
+                });
+            }, mainNumbers.length * 150);
+        }
+        displayContainer.classList.remove('hidden');
+    }
+
+    function saveToHistory(mainNumbers, bonusNumbers) {
+        const entry = {
+            lotteryKey: selectedLottery,
+            mainNumbers,
+            bonusNumbers,
+            timestamp: new Date().toISOString(),
+        };
+        generationHistory.unshift(entry);
+        if (generationHistory.length > 50) generationHistory.pop();
+        localStorage.setItem('lotteryHistory', JSON.stringify(generationHistory));
+        updateHistory();
+    }
+    
+    // [수정] 함수가 게임별로 통계를 필터링하도록 변경
+    function updateStatistics() {
+        const selector = document.getElementById('analysis-game-selector');
+        if (!selector) return;
+
+        const gameKey = selector.value;
+        const t = translations[currentLang] || translations.ko;
+        const container = document.getElementById('statistics');
+        
+        const filteredHistory = (gameKey === 'all') 
+            ? generationHistory
+            : generationHistory.filter(entry => entry.lotteryKey === gameKey);
+
+        const totalGenerated = filteredHistory.length;
+        const allNumbers = filteredHistory.flatMap(entry => [...entry.mainNumbers, ...(entry.bonusNumbers || [])]);
+        const numberFreq = {};
+        allNumbers.forEach(num => { numberFreq[num] = (numberFreq[num] || 0) + 1; });
+        
+        const mostFrequent = Object.keys(numberFreq).length > 0 ? Object.entries(numberFreq).sort(([, a], [, b]) => b - a)[0][0] : '-';
+        const lastEntry = filteredHistory[0];
+        const lastGenerated = lastEntry ? new Date(lastEntry.timestamp).toLocaleDateString(currentLang) : '-';
+        const avgSum = allNumbers.length > 0 ? Math.round(allNumbers.reduce((a, b) => a + b, 0) / allNumbers.length) : '-';
+
+        container.innerHTML = `
+            <div class="stat-card"><div class="stat-title">${t.totalGenerated}</div><div class="stat-value">${totalGenerated}</div></div>
+            <div class="stat-card"><div class="stat-title">${t.favoriteNumber}</div><div class="stat-value">${mostFrequent}</div></div>
+            <div class="stat-card"><div class="stat-title">${t.lastGenerated}</div><div class="stat-value">${lastGenerated}</div></div>
+            <div class="stat-card"><div class="stat-title">${t.avgSum}</div><div class="stat-value">${avgSum}</div></div>
+        `;
+    }
+
+    // [수정] 기록을 게임별로 그룹화하여 표시
+    function updateHistory() {
+        const container = document.getElementById('history-list');
+        if (!container) return;
+
+        if (generationHistory.length === 0) {
+            container.innerHTML = `<p style="text-align: center; padding: 40px; color: #6b7280;">${translations[currentLang].noHistory}</p>`;
+            return;
+        }
+
+        const groupedHistory = generationHistory.reduce((acc, entry) => {
+            (acc[entry.lotteryKey] = acc[entry.lotteryKey] || []).push(entry);
+            return acc;
+        }, {});
+
+        let html = '';
+        const order = getLotteryOrder(currentLang);
+        
+        order.forEach(key => {
+            if (groupedHistory[key]) {
+                const game = lotteryGames[key];
+                const gameName = game.names[currentLang] || game.names.en;
+                html += `<h4>${gameName}</h4>`;
+                html += groupedHistory[key].map(entry => {
+                    const mainBalls = entry.mainNumbers.map(num => `<div class="history-ball">${num}</div>`).join('');
+                    const bonusBalls = (entry.bonusNumbers || []).map(num => `<div class="history-ball bonus">${num}</div>`).join('');
+                    return `<div class="history-item"><div><div class="history-numbers">${mainBalls}${bonusBalls}</div></div><div style="color: #6b7280; font-size: 0.9rem;">${new Date(entry.timestamp).toLocaleString(currentLang)}</div></div>`;
+                }).join('');
+            }
+        });
+
+        container.innerHTML = html || `<p style="text-align: center; padding: 40px; color: #6b7280;">${translations[currentLang].noHistory}</p>`;
+    }
+
+    // [수정] 함수가 해당 탭의 드롭다운 값을 사용하고 %를 계산하도록 변경
+    function updateProbability() {
+        const selector = document.getElementById('probability-game-selector');
+        if(!selector) return;
+        
+        const gameKey = selector.value;
+        const game = lotteryGames[gameKey];
+        if(!game) return;
+
+        const probabilityString = game.probability;
+        const probabilityValueEl = document.getElementById('probability-value');
+        
+        const parts = probabilityString.split(':');
+        if (parts.length === 2) {
+            const odds = Number(parts[1].replace(/,/g, '').trim());
+            if (!isNaN(odds) && odds > 0) {
+                const percentage = (1 / odds) * 100;
+                probabilityValueEl.textContent = `${probabilityString} (${percentage.toFixed(9)}%)`;
+            } else {
+                probabilityValueEl.textContent = probabilityString;
+            }
+        } else {
+            probabilityValueEl.textContent = probabilityString;
+        }
+
+        document.getElementById('probabilityNote').textContent = translations[currentLang].probabilityNote;
+    }
+
+    function initializeTabs() {
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                const targetTabContent = document.getElementById(`${tab.dataset.tab}-tab`);
+                if (targetTabContent) {
+                    targetTabContent.classList.add('active');
+                    updateAllDynamicContent(); // 탭 전환 시 모든 동적 콘텐츠 업데이트
+                }
+            });
+        });
+    }
+
+    window.generateNumbers = generateNumbers;
+    window.selectLottery = selectLottery;
+    window.loadPastResults = loadPastResults;
+    window.updateStatistics = updateStatistics;
+    window.updateProbability = updateProbability;
+
+    function initialize() {
+        createLanguageSelector();
+        setLanguage('ko');
+        initializeTabs();
+    }
+
+    initialize();
+});
+</script>
+</body>
+</html>
