@@ -1,6 +1,392 @@
-# Allow all web crawlers to access all content
-User-agent: *
-Disallow:
+# AI-Powered Lottery Number Generator - Advanced Robots.txt
+# Optimized for Maximum Traffic & SEO Performance
+# Last Updated: 2025-07-05
 
-# Point to the sitemap file
+# ==============================================
+# SEARCH ENGINE OPTIMIZATION
+# ==============================================
+
+# Google (Primary Search Engine)
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-Mobile
+Allow: /
+Crawl-delay: 1
+
+# Bing (Microsoft Search)
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: msnbot
+Allow: /
+Crawl-delay: 2
+
+# Yandex (Russian Search Engine)
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 3
+
+User-agent: YandexImages
+Allow: /
+Crawl-delay: 3
+
+# Baidu (Chinese Search Engine)
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 3
+
+User-agent: Baiduspider-image
+Allow: /
+Crawl-delay: 3
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 2
+
+# Yahoo
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# ==============================================
+# SOCIAL MEDIA CRAWLERS (Traffic Boost)
+# ==============================================
+
+# Facebook
+User-agent: facebookexternalhit
+Allow: /
+Crawl-delay: 1
+
+# Twitter/X
+User-agent: Twitterbot
+Allow: /
+Crawl-delay: 1
+
+# LinkedIn
+User-agent: LinkedInBot
+Allow: /
+Crawl-delay: 1
+
+# WhatsApp
+User-agent: WhatsApp
+Allow: /
+Crawl-delay: 1
+
+# Telegram
+User-agent: TelegramBot
+Allow: /
+Crawl-delay: 1
+
+# Pinterest
+User-agent: Pinterest
+Allow: /
+Crawl-delay: 2
+
+# Instagram
+User-agent: InstagramBot
+Allow: /
+Crawl-delay: 2
+
+# ==============================================
+# SEO & ANALYTICS TOOLS
+# ==============================================
+
+# Ahrefs
+User-agent: AhrefsBot
+Allow: /
+Crawl-delay: 5
+
+# SEMrush
+User-agent: SemrushBot
+Allow: /
+Crawl-delay: 5
+
+# Moz
+User-agent: rogerbot
+Allow: /
+Crawl-delay: 5
+
+# Screaming Frog
+User-agent: Screaming Frog SEO Spider
+Allow: /
+Crawl-delay: 3
+
+# ==============================================
+# ARCHIVE & RESEARCH BOTS
+# ==============================================
+
+# Internet Archive
+User-agent: ia_archiver
+Allow: /
+Crawl-delay: 10
+
+# Common Crawl
+User-agent: CCBot
+Allow: /
+Crawl-delay: 10
+
+# ==============================================
+# MALICIOUS BOT BLOCKING
+# ==============================================
+
+# Spam Bots
+User-agent: SemrushBot-SA
+Disallow: /
+
+User-agent: AhrefsBot/7.0
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: SiteBot
+Disallow: /
+
+User-agent: linkdexbot
+Disallow: /
+
+User-agent: spbot
+Disallow: /
+
+User-agent: twengabot
+Disallow: /
+
+User-agent: postrank
+Disallow: /
+
+User-agent: turnitinbot
+Disallow: /
+
+User-agent: sindice
+Disallow: /
+
+User-agent: Aboundex
+Disallow: /
+
+User-agent: MSIECrawler
+Disallow: /
+
+User-agent: SBIder
+Disallow: /
+
+User-agent: psbot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: MegaIndex
+Disallow: /
+
+# Email Harvesters
+User-agent: EmailCollector
+Disallow: /
+
+User-agent: EmailSiphon
+Disallow: /
+
+User-agent: WebBandit
+Disallow: /
+
+User-agent: EmailWolf
+Disallow: /
+
+# Content Scrapers
+User-agent: HTTrack
+Disallow: /
+
+User-agent: WebZIP
+Disallow: /
+
+User-agent: WebCopier
+Disallow: /
+
+User-agent: WebStripper
+Disallow: /
+
+User-agent: SiteSnagger
+Disallow: /
+
+User-agent: ProWebWalker
+Disallow: /
+
+User-agent: CheeseBot
+Disallow: /
+
+User-agent: CherryPicker
+Disallow: /
+
+User-agent: EmailCollector
+Disallow: /
+
+User-agent: WebEMailExtrac
+Disallow: /
+
+User-agent: ExtractorPro
+Disallow: /
+
+User-agent: CopyRightCheck
+Disallow: /
+
+User-agent: Crescent
+Disallow: /
+
+User-agent: SiteSnagger
+Disallow: /
+
+User-agent: ProWebWalker
+Disallow: /
+
+User-agent: BackRub
+Disallow: /
+
+User-agent: SurveyBot
+Disallow: /
+
+User-agent: Zeus
+Disallow: /
+
+User-agent: Indy Library
+Disallow: /
+
+User-agent: WWWOFFLE
+Disallow: /
+
+# ==============================================
+# AI TRAINING BOTS (Optional Blocking)
+# ==============================================
+
+# OpenAI GPT
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 5
+
+User-agent: ChatGPT-User
+Allow: /
+Crawl-delay: 5
+
+# Google Bard/Gemini
+User-agent: Google-Extended
+Allow: /
+Crawl-delay: 5
+
+# Claude (Anthropic)
+User-agent: ClaudeBot
+Allow: /
+Crawl-delay: 5
+
+# Common AI Crawlers
+User-agent: CCBot
+Allow: /
+Crawl-delay: 10
+
+User-agent: anthropic-ai
+Allow: /
+Crawl-delay: 5
+
+# ==============================================
+# SPECIFIC DIRECTORY PERMISSIONS
+# ==============================================
+
+# Allow all files and directories
+Allow: /?lang=ko
+Allow: /?lang=en
+Allow: /?lang=ja
+Allow: /?lang=zh
+Allow: /?lang=es
+Allow: /?lang=fr
+Allow: /?lang=de
+Allow: /?lang=ru
+Allow: /?lang=pt
+Allow: /?lang=id
+Allow: /?lang=hi
+Allow: /?lang=ar
+
+# Allow common assets
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.svg
+Allow: /*.webp
+Allow: /*.ico
+Allow: /*.woff
+Allow: /*.woff2
+Allow: /*.ttf
+Allow: /*.eot
+
+# ==============================================
+# DEFAULT RULES FOR ALL OTHER BOTS
+# ==============================================
+
+User-agent: *
+Allow: /
+Crawl-delay: 5
+
+# ==============================================
+# SITEMAP LOCATIONS
+# ==============================================
+
 Sitemap: https://tjq8288.github.io/lottery-generator/sitemap.xml
+
+# ==============================================
+# ADDITIONAL SEO DIRECTIVES
+# ==============================================
+
+# Host directive (helps with canonicalization)
+Host: tjq8288.github.io
+
+# Clean URLs parameter handling
+Clean-param: utm_source
+Clean-param: utm_medium
+Clean-param: utm_campaign
+Clean-param: utm_content
+Clean-param: utm_term
+Clean-param: fbclid
+Clean-param: gclid
+Clean-param: ref
+Clean-param: source
+
+# ==============================================
+# COMMENTS & DOCUMENTATION
+# ==============================================
+
+# This robots.txt file is optimized for:
+# - Maximum search engine visibility
+# - Traffic generation across all major search engines
+# - Social media sharing optimization
+# - Malicious bot protection
+# - Multi-language SEO support
+# - Mobile-first indexing
+# - AI crawler management
+# 
+# Supported Languages: 12 languages
+# - Korean (ko) - Primary
+# - English (en) - Global
+# - Japanese (ja) - Asia Pacific
+# - Chinese (zh) - China/Taiwan
+# - Spanish (es) - Latin America/Spain
+# - French (fr) - France/Canada
+# - German (de) - Germany/Austria
+# - Russian (ru) - Russia/CIS
+# - Portuguese (pt) - Brazil/Portugal
+# - Indonesian (id) - Southeast Asia
+# - Hindi (hi) - India
+# - Arabic (ar) - Middle East
+#
+# Contact: tjq8288@github.com
+# Last Updated: 2025-07-05
+# Version: 2.0
